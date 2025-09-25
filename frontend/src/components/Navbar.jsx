@@ -1,16 +1,23 @@
 import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import {
+  HomeIcon,
+  ChartBarIcon,
+  HeartIcon,
+  ArrowRightOnRectangleIcon,
+  UserPlusIcon,
+} from "@heroicons/react/24/outline"; // Import heroicons
 
 const Navbar = () => {
   const location = useLocation();
   const [isOpen, setIsOpen] = useState(false);
 
   const navLinks = [
-    { name: "Home", path: "/" },
-    { name: "Dashboard", path: "/dashboard" },
-    { name: "Favorites", path: "/favorites" },
-    { name: "Login", path: "/login" },
-    { name: "Register", path: "/register" },
+    { name: "Home", path: "/", icon: <HomeIcon className="h-5 w-5 inline-block mr-1" /> },
+    { name: "Dashboard", path: "/dashboard", icon: <ChartBarIcon className="h-5 w-5 inline-block mr-1" /> },
+    { name: "Favorites", path: "/favorites", icon: <HeartIcon className="h-5 w-5 inline-block mr-1" /> },
+    { name: "Login", path: "/login", icon: <ArrowRightOnRectangleIcon className="h-5 w-5 inline-block mr-1" /> },
+    { name: "Register", path: "/register", icon: <UserPlusIcon className="h-5 w-5 inline-block mr-1" /> },
   ];
 
   return (
@@ -31,11 +38,11 @@ const Navbar = () => {
               <Link
                 key={link.name}
                 to={link.path}
-                className={`relative text-lg font-medium transition-all duration-300 hover:text-yellow-300 ${
+                className={`relative text-lg font-medium transition-all duration-300 hover:text-yellow-300 flex items-center ${
                   location.pathname === link.path ? "text-yellow-300" : "text-white"
                 }`}
               >
-                {link.name}
+                {link.icon} {link.name}
                 {/* Underline Animation */}
                 <span
                   className={`absolute left-0 -bottom-1 h-[2px] w-0 bg-yellow-300 transition-all duration-300 ${
@@ -86,13 +93,13 @@ const Navbar = () => {
               key={link.name}
               to={link.path}
               onClick={() => setIsOpen(false)}
-              className={`block text-lg font-semibold rounded-md px-3 py-2 transition-all duration-300 transform hover:scale-105 ${
+              className={`block text-lg font-semibold rounded-md px-3 py-2 transition-all duration-300 transform hover:scale-105 flex items-center ${
                 location.pathname === link.path
                   ? "bg-yellow-300 text-gray-900"
                   : "text-white hover:bg-yellow-300 hover:text-gray-900"
               }`}
             >
-              {link.name}
+              {link.icon} {link.name}
             </Link>
           ))}
         </div>
